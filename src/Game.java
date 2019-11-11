@@ -7,9 +7,9 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JPanel;
 
+//This class manages the game itself and all aspects of it. It is called by the Start class to begin the game
 public class Game extends JPanel implements KeyListener, Runnable {
 
 	private static final long serialVersionUID = 1L;
