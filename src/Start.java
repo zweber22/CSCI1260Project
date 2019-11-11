@@ -2,6 +2,7 @@ package com.csci1260uR.RoyalGameOfUr;
 
 import javax.swing.JFrame;
 
+//This is the main class. It manages and runs the game
 public class Start {
 	public static void main(String[] args) {
 		Game game = new Game();
