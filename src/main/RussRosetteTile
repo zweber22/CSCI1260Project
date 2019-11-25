@@ -1,0 +1,66 @@
+/**
+ * Note that this is a subclass of Tile.  It does not include its own Constructor.  Instead, when the UrGameBoard class
+ * instantiates the Rosette objectes it will use the Object class default Constructor.
+ * ---------------------------------------------------------------------------
+ * File name: RosetteTile.java
+ * Project name: Game of Ur
+ * ---------------------------------------------------------------------------
+ * Creator's name and email: Russ Stipelcovich, stipelcovich@etsu.edu
+ * Course:  CSCI 1260
+ * Creation Date: Nov 23, 2019
+ * ---------------------------------------------------------------------------
+ */
+
+//package tiles;
+
+//import model.Piece;
+//import model.Turn;
+
+import java.awt.*;
+
+/**
+ * Note that this is a subclass of Tile.  It does not include its own Constructor.  Instead, when the UrGameBoard class
+ * instantiates the Rosette objectes it will use the Object class default Constructor.
+ *
+ * <hr>
+ * Date created: Nov 23, 2019
+ * <hr>
+ * @author Russ Stipelcovich
+ */
+public class RosetteTile extends Tile {
+
+    @Override
+    public Image getTileImage()
+    
+    {
+        return null;
+    }
+
+    @Override
+    public Turn onEnter(Piece piece) //Still need to reconcile the terms Token and Piece
+    
+    {
+        if (hasPiece())
+        
+        {
+            return new Turn(false, false);
+        }
+        
+        setPiece(piece);
+        
+        return new Turn(true, true);
+    }
+
+    @Override
+    public boolean canEnter(Piece piece)
+    
+    {
+        if (hasPiece())
+        
+        {
+            return false;
+        }
+        
+        return true;
+    }
+}
