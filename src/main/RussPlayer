@@ -1,0 +1,125 @@
+/** Create a Abstract Player supperclass that can be subclassed by the Human class and possible future AI class.  This class
+ *  also collaborates with the Token and Tile classes.  The Human class will be used to instantiate the player1 and player2 
+ *  objects to play the game.
+ */
+
+import java.util.ArrayList;
+
+
+/**
+ * ---------------------------------------------------------------------------
+ * File name: RussPlayer.java
+ * Project name: GameOfUr
+ * ---------------------------------------------------------------------------
+ * Creator's name and email: Russ Stipelcovich, stipelcovich@etsu.edu
+ * Course:  CSCI 1260
+ * Creation Date: Nov 23, 2019
+ * ---------------------------------------------------------------------------
+ */
+
+/**
+ * Abstract super class that can be exteneded by Human subclass to crate Player objects now and possible future AI Player
+ * in the future.
+ *
+ * <hr>
+ * Date created: Nov 23, 2019
+ * <hr>
+ * @author Russ Stipelcovich
+ */
+
+	
+	/**Parent class for all player, both human and AI
+  */ 
+  
+  abstract class Player
+  {
+	    /**player ID*/
+	
+  public int id = 1;
+
+	    /**list of tokens that did not reach the goal yet that belong to a particular player
+      */
+      
+	    protected ArrayList<Token> tokens;
+
+	    /** Constructor to assign and build an array of 7 tokens for a Player object.
+	     * @param id Player ID
+	     */
+	    
+      public Player(int id)
+      
+      {
+	        this.id = id;
+
+	        tokens = new ArrayList<Token>();
+
+	    /** every player starts with 7 tokens*/
+	    
+          for (int i = 0; i < 7; i++)
+          
+          {
+	            tokens.add(new Token(i, this.id));
+	        }
+	    }
+
+	    /** This method removes a token from player (used when goal is reached).  So a player wins when his tokens array is null.
+	     * @param token Token that should be removed
+	     */
+	    
+      public void removeToken(Token token)
+      
+      {
+	        tokens.remove(token);
+	    }
+
+	    
+	    /**This abstract method is called every time the player can move a token
+	     * 
+	     * @param board Game board
+	     * @param opponentsTokens Tokens of your opponent
+	     * @param dice dice result
+	     * @return Token that should be moved this turn
+	     */
+	    
+      abstract Token turn(Tile[] board, ArrayList<Token> opponentsTokens, int dice);
+
+	   
+	    /** getter and setter methods
+	     *  This method returns the players name
+	     */ @return Player name (with ID)*/
+	    
+      public final String getName()
+      
+      {
+          return getType()+id;
+      }
+
+	    /** This method returns the players type
+	     * @return Player type*/
+	    
+      public String getType()
+      
+      {
+          return "Player";
+      }
+
+	    /** This method returns the players ID
+	     * @return Player ID
+       */
+	    
+      public int getID()
+      
+      {
+          return id;
+      }
+
+	    /** This method returns the token list for this player
+	     */ @return List of players tokens (that have not reched the goal yet
+       
+	    public ArrayList<Token> getTokens()
+      
+      {
+          return tokens;
+      }
+		
+}
