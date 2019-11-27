@@ -18,9 +18,9 @@ import java.util.ArrayList;
  *
  * Team Zach:  Zach Weber, Ramiro Rodriguez, and Russ Stipelcovich
  * 
- * Tile class is a super class to create and array of spaces for a game board.
+ * Tile class is creates an array of spaces (TileIds) for the UrGameBoard.
  * 
- * Subclasses include a NormalTile and a RosetteTile(RollOver space and SafeSpace).
+ * 
  * 
  * <hr>
  * Date created: Nov 27, 2019
@@ -176,7 +176,7 @@ public class Tile
     }
 
     /**Checks if other player's piece is already on this tileId.
-     * @param playerId:   current player's piece tileId.
+     * @param playerId:   other player's piece tileId.
      * @return true: If other player's piece is on this tileId; otherwise, return false.
      */
      
