@@ -69,13 +69,12 @@ public class Tile
 	 */
 	public Tile (int tileId, boolean rollAgain, boolean isPrivate)
 	{
-		super ( );
 		this.tileId = tileId;
 		this.rollAgain = rollAgain;
 		this.isPrivate = isPrivate;
+		
+		pieces = new ArrayList<Piece>;
 	}
-
-
 
 	
 	/**  Getter for TileId returns one of the TileIds and its attributes or properties
@@ -106,3 +105,84 @@ public class Tile
 	{
 		return isPrivate;
 	}
+	
+	
+	/** This method removes a piece from tileId space on the board.
+     * @param piece:  piece that should be removed from tileId space.
+     */
+    
+	public void removePiece(Piece piece){
+        
+		//remove piece from tileId
+        pieces.remove(piece);
+        
+		//remove tileId from piece
+        piece.setTileId(null);
+    }
+
+    /** This method adds a piece to tileId.
+     * and removes the other player's tileId if there is one;
+     * it also checks to see if a move is possible, which is done at Main.move())
+     *
+     * @param piece: piece that should be added to the space identified by TileId.
+     */
+    
+	
+	public void addPiece(Piece piece){
+        
+		//add piece to tileId
+        
+	pieces.add(piece);
+       
+	    //add the tileId to the piece object
+	    
+        piece.setTileId(this);
+        
+	    //remove other player's piece, if necessary.
+	    
+        if(!isPrivate && !rollAgain)
+	{
+            for(Piece p : pieces)
+	    {
+                if(p.getPlayer()! = piece.getPlayer())
+		{
+                    removePiece(p);
+                }
+            }
+        }
+    }
+
+    /**This method checks if current player's piece is already on this tileId.
+     * @param playerId:  current player's piece tileId
+     * @return true:  If current player's piece is on this tileId; otherwise, return false.
+     */
+    
+    public boolean isOccupiedByCurrentPlayer(int playerId)
+    {
+        for(Piece p : pieces)
+	{
+            if(p.getPlayer() == playerId)
+	    {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**Checks if other player's piece is already on this tileId.
+     * @param playerId:   current player's piece tileId.
+     * @return true: If other player's piece is on this tileId; otherwise, return false.
+     */
+     
+    public boolean isOccupiedByOtherPlayer(int playerId)
+    {
+        for(Piece p : pieces)
+	{
+            if(p.getPlayer() != playerId)
+	    {
+                return true;
+            }
+        }
+        return false;
+    }
+	
