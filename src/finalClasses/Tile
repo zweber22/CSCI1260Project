@@ -111,14 +111,18 @@ public class Tile
      * @param piece:  piece that should be removed from tileId space.
      */
     
-	public void removePiece(Piece piece){
+	public void removePiece(Piece piece)
+	{
         
-		//remove piece from tileId
+		//remove piece from tileId.
+		
         pieces.remove(piece);
         
-		//remove tileId from piece
+		//remove tileId from piece.
+		
         piece.setTileId(null);
-    }
+	
+    	}
 
     /** This method adds a piece to tileId.
      * and removes the other player's tileId if there is one;
@@ -128,9 +132,11 @@ public class Tile
      */
     
 	
-	public void addPiece(Piece piece){
+	public void addPiece(Piece piece)
+	
+	{
         
-		//add piece to tileId
+		//add piece to tileId.
         
 	pieces.add(piece);
        
