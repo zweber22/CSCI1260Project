@@ -12,7 +12,7 @@
 package GOUClassFiles;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /**
  * CSCI 1260 Final Project - Game of Ur 2-Player Board Game with GUI Interface
@@ -20,7 +20,7 @@ import java.util.Scanner;
  * Team Zach:  Zach Weber, Ramiro Rodriguez, and Russ Stipelcovich
  * 
  * Player class is used by the UrGameBoard to create 2 players, player1 and player2. Each player in turn
- * will be associated with 7 pieces (Piece object with pieceId number), a playerPieces ArrayList and a
+ * will be associated with 7 pieces (Piece object with pieceId number), a playerPieces ArrayList, and a
  * playerFinishedPiece ArrayList for keeping track when the player wins the game.
  * The pieceId, in turn, will be associated with the tileId as it moves on to the game board, around the
  * game board, and, ultimately, off the game board.
@@ -36,12 +36,19 @@ public class Player
 
 	/**player ID*/
 	
-    protected int playerId = 1;
+    private int playerId;
+	
 
+    /**list of player piece objects that are assigned to a player.
+     */
+    
+    private ArrayList<Piece> playerPieces;
+	
+	
     /**list of player object pieceIds that did not reach the finish line (added to finishedPieces ArrayList) yet
      */
     
-    protected ArrayList<Piece> playerPieces;
+    private ArrayList<Piece> finishedPlayerPieces;
 
     
    /** Constructor - Parameterized:  creates a player object
@@ -53,17 +60,18 @@ public class Player
     public Player(int playerId)
 	
     {
-
        this.playerId = playerId;
    
-
+       playerPieces = new ArrayList<Piece>();
+	    
    	/** every player starts with 7 piecesIds*/
    
-	   	for (int i = 0; i < 7; i++)
-	   	{
-	   		playerPieces.add(new Piece(i, this.playerId));
-	   	}
-   		
+	for (int i = 1; i < 8; i++)
+	{
+		playerPieces.add(new Piece(i, this.playerId));
+	}
+   	
+	finishedPlayerPieces = new ArrayList<Piece>();
     }
     
    /**This method is called every time the player can move a pieceId.
@@ -88,9 +96,9 @@ public class Player
            
            System.out.print("):\n");
            
-           Scanner scanner = new Scanner(System.in); // This will be integrated into the GUI, somehow.
+           //Scanner scanner = new Scanner(System.in); // This will be integrated into the GUI, somehow.
 			
-           int pieceId = scanner.nextInt();
+           int pieceId = 1;  //scanner.nextInt();
 
            for(Piece p : playerPieces)
            {
@@ -100,24 +108,24 @@ public class Player
                }
            }
            
-           scanner.close();
+           //scanner.close();
        }
  
    }
 
   
 
-    /** This method removes a piece from the player (used when the finished line is reached)
+    /** This method adds a piece from the player to the finishedPlayerPiecs when the finished line is reached.
      * @param piece Piece that should be removed and added to finishedPieces ArrayList.
      */
-    public void removePiece(Piece pieceId)
+    public void addToFinishedPlayerPieces(Piece pieceId)
     {
-        playerPieces.remove(pieceId);
+        finishPlayerPieces.add(pieceId);
     }
 
         
 
-    /** This method returns the players playerId (name).
+    /** This method returns the playerId (name).
      * @return Player playerId
      */
     
@@ -134,7 +142,7 @@ public class Player
      * @return playerPieces<Piece>:  List of playPieces that have not reached the finish line yet.
      */
     
-    public ArrayList<Piece> getPieces()
+    public ArrayList<Piece> getPlayerPieces()
     {
     	return playerPieces;
     	
