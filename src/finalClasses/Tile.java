@@ -31,25 +31,27 @@ public class Tile
 {
 
 	// The tileId field instance variable (type int) is used to assign the order position of the 14 board spaces.
-	// The assigned valued is between 0 and 13.
+	// The assigned valued is between 1 and 14.
 	
 	private int tileId;
 	
+	
 	// The pieces field instance variable ArrayList of type Piece objects holds the list of Pieces on each TileId.
-	// TileId 0 - 3 and 12 - 13 spaces (isPrivate = true) can hold a list of two pieces.
-	// TileId 4 - 11 spaces (isPrivate = false) can hold a list of one Piece.
+	// TileId 1 - 4 and 13 - 14 spaces (isPrivate = true) can hold a list of two pieces, one from each player.
+	// TileId 5 - 12 spaces (isPrivate = false) can hold a list of one Piece at a time.
 	
-	private ArrayList<Piece> pieces;
+	private ArrayList<Piece> piecesOnTile;
 	
 	
-	// The rollAgain field instance variable boolean type identifies the TileId spaces 3, 7, 12 as roll again
-	// spaces (rollAgain = true), while, for TileId spaces 0 - 2, 4 - 6, 8 - 11, and 13 rollAgain = false.
+	// The rollAgain field instance variable boolean type identifies the TileId spaces 4, 8, 13 as roll again
+	// spaces (rollAgain = true), while, for TileId spaces 1 - 3, 5 - 7, 9 - 12, and 14 rollAgain = false.
+	
 	
 	private boolean rollAgain;
 	
 	
-	// The isPrivate field instance variable boolean type identifies the TileId spaces 0 - 3 and 12 - 13 as isPrivate
-	// (isPrivate = true), while, for TileId spaces 4 - 11 isPrivate = false.
+	// The isPrivate field instance variable boolean type identifies the TileId spaces 1 - 4 and 13 - 14 as isPrivate
+	// (isPrivate = true), while, for TileId spaces 5 - 12 isPrivate = false.
 	
 	
 	private boolean isPrivate;
@@ -69,17 +71,20 @@ public class Tile
 	 */
 	public Tile (int tileId, boolean rollAgain, boolean isPrivate)
 	{
-		super ( );
+		
 		this.tileId = tileId;
 		this.rollAgain = rollAgain;
 		this.isPrivate = isPrivate;
+		
+		piecesOnTile = new ArrayList<Piece>();
 	}
 
 
 
 	
 	/**  Getter for TileId returns one of the TileIds and its attributes or properties
-	 *  (its space 0 - 13 position, isPrivate:  true or false, and rollAgain: true or false 
+	 *  (its space 1 - 14 position, isPrivate:  true or false, rollAgain: true or false
+	 *  and the ArrayList of Piece objects on that tileID at the beginning and ending of each turn
 	 *   for its space on the game board (UrGameBoard).
 	 * @return tileId
 	 */
@@ -108,17 +113,21 @@ public class Tile
 	}
 
 
+	/**
+	 * @return piecesOnTile
+	 */
+	public ArrayList<Piece> getPiecesOnTile ( )
+	{
+		return piecesOnTile;
+	}
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * @param pieces the pieces to set
+	 */
+	public void setPiecesOnTile (ArrayList<Piece> piecesOnTile)
+	{
+		this.piecesOnTile = piecesOnTile;
+	}
 	
 }
