@@ -1,0 +1,23 @@
+ if(!doValidMovesExsist(gameBoard, currentPlayer, dice))
+        {
+        	return false;
+        }
+
+        //move otherwise. throw error if move is not possible
+        
+        move(player, player.turn(board, this.player[activePlayer].getTokens(), dice), dice);
+            
+        //throw new Error("Illegal Move ("+player.getID());
+
+
+        //check if player has won
+        
+        if(finishedTokens[player.getID()].size()==7)
+        {
+            output.print(player.getName() + " won!\n");
+
+           return true;
+        }
+
+        return false;
+    }
