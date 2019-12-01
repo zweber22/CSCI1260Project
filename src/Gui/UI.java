@@ -18,18 +18,20 @@ import java.awt.*;
  *
  * <hr>
  * Date created: 11-24-19 <br>
- * Date last modified: 11-26-19
+ * Date last modified: 11-30-19
  * @author Zachary Weber
  */
 public class UI
 {
 
-    JFrame window;
-    JPanel titlePanel, playPanel, quitPanel;
-    JLabel titleLabel;
-    JButton playButton, quitButton;
-    Font titleFont = new Font("Verdana", Font.PLAIN, 120);
-    Font normalFont = new Font("Verdana", Font.PLAIN, 25);
+    public JFrame window = new JFrame();
+    public JLabel titleLabel = new JLabel();
+    public JButton playButton = new JButton();
+    public JButton quitButton = new JButton();
+    public JButton rulesButton = new JButton();
+    Font titleFont = new Font("Castellar", Font.PLAIN, 70);
+    Font normalFont = new Font("Castellar", Font.PLAIN, 30);
+
 
     Board board = new Board();
 
@@ -39,7 +41,7 @@ public class UI
      *
      * <hr>
      * Date created: 11-24-19 <br>
-     * Date last modified: 11-26-19 <br>
+     * Date last modified: 11-30-19 <br>
      *
      * <hr>
      * Notes on specifications, special algorithms, and assumptions:
@@ -52,53 +54,41 @@ public class UI
     public void createUI(Game.ChoiceHandler mHandler)
     {
         //Creates the window
-        window = new JFrame("Royal Game Of Ur");
-        window.setSize(1600, 900);
-        //window.setLayout(null);
+        window.setExtendedState(Frame.MAXIMIZED_BOTH);
+        FlowLayout f = new FlowLayout(1, 200, 175); //Sets the layout of the title and buttons
+        window.setLayout(f); //Apply's the layout to the frame
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
+        window.getContentPane().setBackground(Color.black); //Sets the background color to black
 
-        //Creates the title screen
-        titlePanel = new JPanel();
-        titlePanel.setBounds(200, 100, 1100, 500);
-        titlePanel.setBackground(Color.black);
-        titleLabel = new JLabel("Royal Game Of Ur");
-        titleLabel.setForeground(Color.WHITE);
+        //Making the title label and setting its properties
+        titleLabel.setText("Royal Game of Ur");
+        titleLabel.setForeground(Color.white);
+        titleLabel.setBackground(Color.black);
         titleLabel.setFont(titleFont);
-        titlePanel.add(titleLabel);
 
-        //Creates the panel and button for Play
-        playPanel = new JPanel();
-        playPanel.setBounds(650, 600, 300, 200);
-        playPanel.setBackground(Color.black);
-        playButton = new JButton("Play");
-        playButton.setBackground(Color.black);
-        playButton.setForeground(Color.WHITE);
+        //Making the play button and setting its properties
+        playButton.setText("Play");
+        playButton.setBackground(Color.BLACK);
+        playButton.setForeground(Color.white);
         playButton.setFont(normalFont);
-        playButton.setFocusPainted(false);
-        playButton.addActionListener(mHandler);
-        playButton.setActionCommand("Play");
-        playPanel.add(playButton);
+        playButton.setHorizontalAlignment(SwingConstants.CENTER);
+        playButton.addActionListener(mHandler); //Adds an action listener to the button
+        playButton.setBorderPainted(false);
 
-        //Creates the panel and button for Quit
-        quitPanel = new JPanel();
-        quitPanel.setBounds(650, 700, 300, 200);
-        quitPanel.setBackground(Color.black);
-        quitButton = new JButton("Quit");
-        quitButton.setBackground(Color.black);
-        quitButton.setForeground(Color.WHITE);
+        //Making the play button and setting its properties
+        quitButton.setText("Quit");
+        quitButton.setBackground(Color.BLACK);
+        quitButton.setForeground(Color.white);
         quitButton.setFont(normalFont);
-        quitButton.setFocusPainted(false);
-        quitButton.addActionListener(mHandler);
-        quitButton.setActionCommand("Quit");
-        quitPanel.add(quitButton);
+        quitButton.setHorizontalAlignment(SwingConstants.CENTER);
+        quitButton.addActionListener(mHandler); //Adds an action listener to the button
+        quitButton.setBorderPainted(false);
 
-        //Adds all the panels to the JFrame
-        window.add(titlePanel);
-        window.add(playPanel);
-        window.add(quitPanel);
-        window.add(board);
-        window.pack();
+        //Adds all the elements to the frame to be displayed
+        window.add(titleLabel, f);
+        window.add(playButton, f);
+        window.add(quitButton, f);
+        window.add(board.getGui());
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
