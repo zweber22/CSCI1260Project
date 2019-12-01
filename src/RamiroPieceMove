@@ -1,0 +1,188 @@
+// ---------------------------------------------------------------------------
+// File name: PieceMove
+// Project name: FinalGameOfUr
+// ---------------------------------------------------------------------------
+// Creator’s name and email: Ramiro Rodriguez, rodriguezr@etsu.edu					
+//	Creation Date:	11/27/19		
+// Date of Last Modification: 12/1/19		
+// ---------------------------------------------------------------------------
+
+
+package GOUClassFiles;
+import java.util.ArrayList;
+
+
+/**
+ * Class Name: PieceMove <br>
+ * Class Purpose: Moves a single game piece a specific amount of spaces
+ * based on the numbers that the player rolled on their dice <br>
+ *
+ * <hr>
+ * Date created: 11/27/19 <br>
+ * Date last modified: 12/1/19
+ * @author Ramiro Rodriguez
+ */
+
+public class PieceMove implements
+{
+	Player currentPlayer;			//shows which player is taking a turn
+	Player otherPlayer;				//shows which player is waiting to take their turn
+	Tile gameBoard;					//game board for the Game of Ur
+	ArrayList<Piece> playerPieces	//ArrayList that contains all of a player's pieces
+	int tileID						//unique number that identifies a specific tile
+	
+	
+  /** Tests if a move is vald then moves a game piece accordingly
+     * @param player Player whose turn it is
+     * @param piece Piece that should be moved
+     * @param dice Number of fields to move
+     * @return true if move is successful, return false otherwise
+     */
+    private boolean move(Player currentPlayer, Piece piece, int dice)
+    {
+        //Stops movement if the dice value equals zero
+    	if(dice == 0)
+    	{
+    		return true;
+    	}
+
+        //Stops movement if it is illegal to move 
+    	if(!doValidMovesExist(gameBoard, playerPieces, dice))
+    	{
+    		return true;
+    	}
+
+        
+        if(currentPlayer.getPlayerId() != piece.getPlayerId())
+        {	
+        	return false;
+		}
+		
+        //checks if move is valid (adheres to the game rules)
+        if(!isValidMove(gameBoard, piece, dice))
+        {
+        	return false;
+        }
+
+        //checks if a game piece has reached the end of the board    
+        if(piece.getTileId()!=null && piece.getTileId().getTileId()+dice==14)
+        {
+            piece.getTileId().removePiece(piece);
+            
+            finishedPieces[player.getTileId()].add(piece);
+            
+            player.removePiece(piece);
+            
+            return true;
+        }
+
+        //calculates new tile ID
+        Tile newTile;
+        
+        if(piece.getTileId() == null)
+        {  
+        	//Executes if a piece is not on the board yet
+            newTile = gameBoard[dice-1];
+            
+        }
+        else
+        {     //Executes if there is a already on board
+        	
+            newTile = gameBoard[piece.getTileId().getID() + dice];
+        }
+
+        //Changes the active player back to the same one if you land on a double roll       
+        if(newTile.isRollAgain())
+        {
+            currentPlayer = player.getID();
+        }
+
+        //Moves the piece        
+        if(piece.getTileId()!=null)
+        {
+        	piece.getTileId().removePiece(piece);
+        }
+        
+        newTile.addPiece(piece);
+        return true;
+    }
+
+    /**Tests if a move is valid
+    * @param gameBoard	 the game board
+    * @param piece 		 piece that should be moved
+    * @param dice 		 number of tiles to move
+    * @return false if move is invalid, return true otherwise
+    */
+    
+    public static boolean isValidMove(Tile[] gameBoard, Piece piece, int dice)
+    {
+        //Any move will be valid if the dice is zero  	
+        if(dice == 0)
+        { 
+        	return true;
+        	}
+
+        //calculates a new tile ID        
+        int newTileID;
+        
+        //tests if piece hasn't been placed on the board yet       
+        if(piece.getTileId()==null)
+        {
+            newTileID = dice-1;
+        }        
+        else
+        {
+            newTileID = piece.getTileId().getTileId() + dice;
+        }
+
+        //tests if the player has reached the goal       
+        if(newTileID == 14)
+        {
+        	return true;
+        }
+
+        //tests if the player has moved out of the established board area       
+        else if(newTileID > 14)
+        {
+        	return false;
+        }
+
+        //finds a new Tile       
+        Tile newTile = gameBoard[newTileID];
+
+        //test if a tile is blocked by another game piece        
+        if(newTile.isOccupiedByOwn(piece.getPlayerId()))
+        {
+        	return false;
+        }
+
+        //tests if the other player is on a safespot        
+        if(!newTile.isPrivate() && newTile.isRollAgain() &&
+        				newTile.isOccupiedByOtherPlayerId(piece.getPlayerId()))
+        {
+        	return false;
+        }
+
+        //returns true otherwise       
+        return true;
+    }
+
+    /** Tests if there are valid moves left for a player and the dice result
+     * @param board Game board
+     * @param player Player whose turn it is
+     * @param dice dice result
+     * @return true if valid turns exist, returns false otherwise
+     */
+    
+     public static boolean doValidMovesExist(Tile[] gameBoard, ArrayList<Piece> playerPieces, int dice)
+     {
+         for(Piece piece : playerPieces)
+         {
+             if(isValidMove(gameBoard, piece, dice))
+            	 
+            	 return true;
+         }
+
+         return false;
+     }
+}
