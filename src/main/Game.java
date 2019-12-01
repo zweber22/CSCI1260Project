@@ -8,6 +8,7 @@
 // Date of Last Modification:	11-26-19
 // ---------------------------------------------------------------------------
 
+package package1;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ public class Game
     ChoiceHandler mHandler = new ChoiceHandler();
     UI ui = new UI();
     Visibility v = new Visibility(ui);
+    Rules r = new Rules();
 
 
     public static void main(String[] args)
@@ -38,7 +40,7 @@ public class Game
      *
      * <hr>
      * Date created: 11-24-19 <br>
-     * Date last modified: 11-26-19 <br>
+     * Date last modified: 11-30-19 <br>
      *
      * <hr>
      * Notes on specifications, special algorithms, and assumptions:
@@ -60,7 +62,7 @@ public class Game
      *
      * <hr>
      * Date created: 11-24-19 <br>
-     * Date last modified: 11-26-19 <br>
+     * Date last modified: 11-30-19 <br>
      *
      * <hr>
      * Notes on specifications, special algorithms, and assumptions:
@@ -80,7 +82,8 @@ public class Game
             switch(choice)
             {
                 case "Play": v.mainMenuToBoard(); break;
-                case "Quit": break; //To be added
+                case "Quit": System.exit(0); break;
+                case "Rules": r.createRules(); break; // To be added
                 //case "roll": break; //To be added
                // case "pass": break; //To be added
             }
