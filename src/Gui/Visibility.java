@@ -20,6 +20,7 @@ package package1;
 public class Visibility
 {
     UI ui;
+    Rules rules;
 
     /**
      * Method Name: Visibility <br>
@@ -62,12 +63,12 @@ public class Visibility
     public void showMainMenu()
     {
         //Show the main menu
-       ui.titlePanel.setVisible(true);
-       ui.playPanel.setVisible(true);
-       ui.quitPanel.setVisible(true);
+       ui.titleLabel.setVisible(true);
+       ui.playButton.setVisible(true);
+       ui.quitButton.setVisible(true);
 
        //Hide the Board
-        ui.board.setVisible(false);
+        ui.board.getGui().setVisible(false);
 
     }
 
@@ -91,12 +92,13 @@ public class Visibility
     public void mainMenuToBoard()
     {
         //Show the Board
-        ui.board.setVisible(true);
+        ui.board.getGui().setVisible(true);
 
         //Hide the main menu
-        ui.titlePanel.setVisible(false);
-        ui.playPanel.setVisible(false);
-        ui.quitPanel.setVisible(false);
+        ui.titleLabel.setVisible(false);
+        ui.playButton.setVisible(false);
+        ui.quitButton.setVisible(false);
+
 
     }
 }
