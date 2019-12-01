@@ -38,14 +38,14 @@ public class Player
 {
 	//player ID
 	
-    public int playerId;
+    private int playerId;
 
-    public int pieceId;
+    private int pieceId;
     
     
     //list of player piece objects that are assigned to a player.
     
-    public ArrayList<Piece> playerPieces;
+    private ArrayList<Piece> playerPieces;
 
     
     
