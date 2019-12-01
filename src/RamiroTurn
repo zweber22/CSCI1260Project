@@ -1,23 +1,77 @@
- if(!doValidMovesExsist(gameBoard, currentPlayer, dice))
+// ---------------------------------------------------------------------------
+// File name: Turn
+// Project name: FinalGameOfUr
+// ---------------------------------------------------------------------------
+// Creator’s name and email: Ramiro Rodriguez, rodriguezr@etsu.edu					
+//	Creation Date:	11/27/19		
+// Date of Last Modification: 12/1/19		
+// ---------------------------------------------------------------------------
+
+
+
+package GOUClassFiles;
+
+
+/**
+ * Class Name: Turn <br>
+ * Class Purpose: Establishes the start and end of each user's turn and 
+ * notifies the players with a message. <br>
+ *
+ * <hr>
+ * Date created: 11/27/19 <br>
+ * Date last modified: 12/1/19
+ * @author Ramiro Rodriguez
+ */
+
+public class Turn 
+{
+	private int currentPlayer;		//shows which player is taking a turn
+	private int otherPlayer;		//shows which player is waiting to take their turn
+	Tile gameBoard;					//game board for the Game of Ur
+	
+	
+	/**
+	* Method Name: Turn <br>
+	* Method Purpose: determines which player's turn it is  <br>
+	*
+	* <hr>
+	* Date created: 11/27/19 <br>
+	* Date last modified: 12/1/19 <br>
+	*
+	* <hr>
+	*   @param  currentPlayer the current player who is about to take their turn
+	*/
+	 
+	public boolean turn(Player currentPlayer)
+	{
+		//changes the active player 
+		currentPlayer = otherPlayer;
+		
+		//rolls the dice for the player
+		int dice = ((Math.Random() < 0 .5)?1:0) + ((Math.Random() < 0 .5)?1:0) + ((Math.Random() < 0 .5)?1:0) +
+			((Math.Random() < 0 .5)?1:0);
+		
+		//moves the token of a player only if the rules of the game permit the movmement
+		if(!doValidMovesExsist(gameBoard, currentPlayer, dice))
         {
         	return false;
         }
-
-        //move otherwise. throw error if move is not possible
+		
+		//if unable to move, stops movement of game piece
+		 if(!doValidMovesExsist(gameBoard, currentPlayer, dice))
+        {
+        	return false;
+        }
         
-        move(player, player.turn(board, this.player[activePlayer].getTokens(), dice), dice);
-            
-        //throw new Error("Illegal Move ("+player.getID());
-
-
-        //check if player has won
-        
+		//determines if a player has won the game
         if(finishedTokens[player.getID()].size()==7)
         {
             output.print(player.getName() + " won!\n");
 
            return true;
         }
-
-        return false;
-    }
+		else
+		{
+			return false;
+		}	
+}
