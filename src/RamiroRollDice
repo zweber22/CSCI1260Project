@@ -1,0 +1,50 @@
+// ---------------------------------------------------------------------------
+// File name: RollDice
+// Project name: FinalGameOfUr
+// ---------------------------------------------------------------------------
+// Creator’s name and email: Ramiro Rodriguez, rodriguezr@etsu.edu					
+//	Creation Date:	11/27/19		
+// Date of Last Modification: 12/1/19		
+// ---------------------------------------------------------------------------
+
+package GOUClassFiles;
+
+/**
+ * Class Name: RollDice <br>
+ * Class Purpose: Rolls all of a single player's dice then returns 
+ * a message that informs the user of the number that each die landed on <br>
+ *
+ * <hr>
+ * Date created: 11/27/19 <br>
+ * Date last modified: 12/1/19
+ * @author Ramiro Rodriguez
+ */
+ 
+public class RollDice
+{
+	
+	/**
+	* Method Name: rollDice <br>
+	* Method Purpose: 	* rollDice "rolls" the 4 binary dice that a player has, determines what number 
+	* is rolled, and then finds the sum of the numbers rolled. <br>
+	*
+	* <hr>
+	* Date created: 11/27/19 <br>
+	* Date last modified: 12/1/19 <br>
+	*
+	* <hr>
+	*   @return the sum of the values rolled by the 4 dice
+		Possible sum of values:
+								0, probability of 1/16 to occur
+								1, probability of 4/16 to occur
+								2, probability of 6/16 to occur
+								3, probability of 4/16 to occur
+								4, probability of 1/16 to occur
+	*/
+	 
+	public int rollDice()
+	{
+		return ((Math.Random() < 0 .5)?1:0) + ((Math.Random() < 0 .5)?1:0) + ((Math.Random() < 0 .5)?1:0) +
+			((Math.Random() < 0 .5)?1:0);
+	}
+}
