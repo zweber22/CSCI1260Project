@@ -31,17 +31,17 @@ public class Piece
 {
 	// Piece ID pieceID can be one of 7 pieces, 7 piece objecs for each player.
   
-	public int pieceId;
+	private int pieceId;
 
  
 	//Each Piece object is assigned to the player.
     
-	public int playerId;
+	private int playerId;
 
 	
 	// Tile the piece currently is on (null if it is on no tile).
     
-	public Tile tileId;
+	private Tile tileId;
 	
 
 	
