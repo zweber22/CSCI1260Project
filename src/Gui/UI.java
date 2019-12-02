@@ -5,7 +5,7 @@
 // Creator’s name and email: Zachary Weber, weberz@etsu.edu
 // Course-Section: CSCI 1260
 //	Creation Date:	11-24-19
-// Date of Last Modification:	11-26-19
+// Date of Last Modification:	12-1-19
 // ---------------------------------------------------------------------------
 package package1;
 
@@ -18,7 +18,7 @@ import java.awt.*;
  *
  * <hr>
  * Date created: 11-24-19 <br>
- * Date last modified: 11-30-19
+ * Date last modified: 12-1-19
  * @author Zachary Weber
  */
 public class UI
@@ -29,11 +29,9 @@ public class UI
     public JButton playButton = new JButton();
     public JButton quitButton = new JButton();
     public JButton rulesButton = new JButton();
-    Font titleFont = new Font("Castellar", Font.PLAIN, 70);
-    Font normalFont = new Font("Castellar", Font.PLAIN, 30);
-
-
-    Board board = new Board();
+    Font titleFont = new Font("Castellar", Font.PLAIN, 100);
+    Font normalFont = new Font("Castellar", Font.PLAIN, 50);
+    
 
     /**
      * Method Name: createUI <br>
@@ -41,7 +39,7 @@ public class UI
      *
      * <hr>
      * Date created: 11-24-19 <br>
-     * Date last modified: 11-30-19 <br>
+     * Date last modified: 12-1-19 <br>
      *
      * <hr>
      * Notes on specifications, special algorithms, and assumptions:
@@ -51,11 +49,11 @@ public class UI
      *   @param mHandler
      *   @return void
      */
-    public void createUI(Game.ChoiceHandler mHandler)
+    public void createUI(ChoiceHandler mHandler)
     {
         //Creates the window
-        window.setExtendedState(Frame.MAXIMIZED_BOTH);
-        FlowLayout f = new FlowLayout(1, 200, 175); //Sets the layout of the title and buttons
+        window.setSize(1400, 1300); //setting the size of the window
+        FlowLayout f = new FlowLayout(1, 250, 175); //Sets the layout of the title and buttons
         window.setLayout(f); //Apply's the layout to the frame
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black); //Sets the background color to black
@@ -65,6 +63,7 @@ public class UI
         titleLabel.setForeground(Color.white);
         titleLabel.setBackground(Color.black);
         titleLabel.setFont(titleFont);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         //Making the play button and setting its properties
         playButton.setText("Play");
@@ -73,7 +72,7 @@ public class UI
         playButton.setFont(normalFont);
         playButton.setHorizontalAlignment(SwingConstants.CENTER);
         playButton.addActionListener(mHandler); //Adds an action listener to the button
-        playButton.setBorderPainted(false);
+        playButton.setBorderPainted(false); //Removes the border around the button
 
         //Making the play button and setting its properties
         quitButton.setText("Quit");
@@ -82,17 +81,28 @@ public class UI
         quitButton.setFont(normalFont);
         quitButton.setHorizontalAlignment(SwingConstants.CENTER);
         quitButton.addActionListener(mHandler); //Adds an action listener to the button
-        quitButton.setBorderPainted(false);
+        quitButton.setBorderPainted(false); //Removes the border around the button
+
+        //Making the rules button and setting its properties
+        rulesButton.setText("Rules");
+        rulesButton.setBackground(Color.BLACK);
+        rulesButton.setForeground(Color.white);
+        rulesButton.setFont(normalFont);
+        rulesButton.setHorizontalAlignment(SwingConstants.CENTER);
+        rulesButton.addActionListener(mHandler); //Adds an action listener to the button
+        rulesButton.setBorderPainted(false); //Removes the border around the button
 
         //Adds all the elements to the frame to be displayed
         window.add(titleLabel, f);
         window.add(playButton, f);
         window.add(quitButton, f);
-        window.add(board.getGui());
+        window.add(rulesButton, f);
+
+        //Finish setting the properties of the window
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+        window.setTitle("Game of Ur");
+        window.setResizable(false);
 
     }
-
-
 }
